@@ -5,7 +5,7 @@ export default class Band {
   @tracked songs;
 
   constructor({ id, name, songs }, relationships={}) {
-    this.id = id
+    this.id = id;
     this.name = name;
     this.songs = songs ?? [];
     this.relationships = relationships;

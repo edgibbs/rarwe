@@ -18,7 +18,6 @@ export default class BandsBandSongsRoute extends Route {
         rels[relationshipName] = relationships[relationshipName].links.related;
       }
       let song = new Song({ id, ...attributes}, rels);
-      console.log('Song', song);
       songs.push(song);
       this.catalog.add('song', song);
     }
