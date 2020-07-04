@@ -9,7 +9,7 @@ export class Band {
   constructor({ name, slug, songs }) {
     this.name = name;
     this.slug = slug;
-    this.songs = songs;
+    this.songs = songs ?? [];
   }
 }
 
@@ -32,25 +32,21 @@ export default class BandsRoute extends Route {
   model() {
     let blackDog = new Song({
       title: 'Black Dog',
-      band: 'Led Zeppelin',
       rating: 3
     });
 
     let yelllowLedbetter = new Song({
       title: 'Yellow Ledbetter',
-      band: 'Pearl Jam',
       rating: 4
     });
 
     let pretender = new Song({
       title: 'The Pretender',
-      band: 'Foo Fighters',
       rating: 2
     });
 
     let daughter = new Song({
       title: 'Daughter',
-      band: 'Pearl Jam',
       rating: 5
     });
 
@@ -71,6 +67,16 @@ export default class BandsRoute extends Route {
       slug: 'foo-fighters',
       songs: [pretender]
     });
+
+    blackDog.band = ledZeppelin;
+    yelllowLedbetter.band = pearlJam;
+    daughter.band = pearlJam;
+    pretender.band = fooFighters;
+
+    this.catalog.add('song', blackDog);
+    this.catalog.add('song', yelllowLedbetter);
+    this.catalog.add('song', daughter);
+    this.catalog.add('song', pretender);
 
     this.catalog.add('band', ledZeppelin);
     this.catalog.add('band', pearlJam);
