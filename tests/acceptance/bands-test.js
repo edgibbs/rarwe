@@ -12,10 +12,9 @@ module('Acceptance | Bands', function(hooks) {
     this.server.create('band', { name: 'Long Distance Calling' });
     await visit('/');
 
-    let bandLinks = document.querySelectorAll('.mb-2 > a');
-    assert.equal(bandLinks.length, 2, 'All band links are rendered');
-    assert.ok(bandLinks[0].textContent.includes('Radiohead'));
-    assert.ok(bandLinks[1].textContent.includes('Long Distance Calling'));
+    assert.dom('[data-test-rr="band-link"]').exists({ count: 2 });
+    assert.dom('[data-test-rr="band-list-item"]:first-child').hasText('Radiohead');
+    assert.dom('[data-test-rr="band-list-item"]:last-child').hasText('Long Distance Calling');
   });
 
   test('Create a band', async function(assert) {
@@ -28,10 +27,9 @@ module('Acceptance | Bands', function(hooks) {
     await click('[data-test-rr="save-band-button"]');
     await waitFor('[data-test-rr="no-songs-text"]');
 
-    let bandLinks = document.querySelectorAll('.mb-2 > a');
-    assert.equal(bandLinks.length, 2)
-    assert.ok(bandLinks[0].textContent.includes('Royal Blood'));
-    assert.ok(bandLinks[1].textContent.includes('Caspian'));
-    assert.ok(document.querySelector('.border-b-4.border-purple-400').textContent.includes('Songs'), 'The Songs tab is active');
+    assert.dom('[data-test-rr="band-list-item"]').exists({ count: 2 });
+    assert.dom('[data-test-rr="band-list-item"]:first-child').hasText('Royal Blood');
+    assert.dom('[data-test-rr="band-list-item"]:last-child').hasText('Caspian');
+    assert.dom('[data-test-rr="songs-nav-item"] > .active').exists();
   });
 });
