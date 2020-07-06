@@ -18,20 +18,20 @@ module('Acceptance | Songs', function(hooks) {
     await click('[data-test-rr="band-link"]');
 
     assert.dom('[data-test-rr="song-list-item"]:first-child').hasText('Elephants');
-    assert.dom('[data-test-rr="song-list-item"]:last-child').hasText('Spinning in Daffodils');
+    assert.dom('[data-test-rr="song-list-item"]:last-child').hasText('Spinning In Daffodils');
 
     await click('[data-test-rr="sort-by-title-desc"]');
-    assert.dom('[data-test-rr="song-list-item"]:first-child').hasText('Spinning in Daffodils');
+    assert.dom('[data-test-rr="song-list-item"]:first-child').hasText('Spinning In Daffodils');
     assert.dom('[data-test-rr="song-list-item"]:last-child').hasText('Elephants');
     assert.ok(currentURL().includes('s=-title'));
 
     await click('[data-test-rr="sort-by-rating-asc"]');
     assert.dom('[data-test-rr="song-list-item"]:first-child').hasText('Mind Eraser, No Chaser');
-    assert.dom('[data-test-rr="song-list-item"]:last-child').hasText('Spinning in Daffodils');
+    assert.dom('[data-test-rr="song-list-item"]:last-child').hasText('Spinning In Daffodils');
     assert.ok(currentURL().includes('s=rating'));
 
     await click('[data-test-rr="sort-by-rating-desc"]');
-    assert.dom('[data-test-rr="song-list-item"]:first-child').hasText('Spinning in Daffodils');
+    assert.dom('[data-test-rr="song-list-item"]:first-child').hasText('Spinning In Daffodils');
     assert.dom('[data-test-rr="song-list-item"]:last-child').hasText('Mind Eraser, No Chaser');
     assert.ok(currentURL().includes('s=-rating'));
   });
