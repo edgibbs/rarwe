@@ -1,5 +1,5 @@
 {{#if this.sortedSongs.length}}
-  <div class="mb-8">
+  <div class="mb-8 flex">
     <span class="relative z-0 inline-flex shadow-sm">
       <LinkTo
         class="rounded-l-md inline-flex items-center px-4 py-2 border border-gray-500 bg-purple-600 leading-5 font-medium text-gray-100 hover:text-white hover:bg-purple-500"
@@ -50,6 +50,20 @@
         />
       </LinkTo>
     </span>
+    <div class="relative ml-auto rounded-md shadow-sm">
+      <input
+        class="border rounded-md py-2 px-3 block w-full pr-10 text-gray-800 sm:text-sm sm:leading-5"
+        data-test-rr="search-box"
+        {{on "input" (set this.searchTerm (get _ "target.value"))}}
+      />
+      <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+        <FaIcon
+          class="h-5 w-5 text-gray-400"
+          @icon="search"
+          @prefix="fas"
+        />
+      </div>
+    </div>
   </div>
 
   <ul>

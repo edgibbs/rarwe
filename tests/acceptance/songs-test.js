@@ -1,5 +1,5 @@
 import { module, test } from 'qunit';
-import { visit, currentURL, click } from '@ember/test-helpers';
+import { visit, currentURL, click, fillIn } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
 import { setupMirage } from 'ember-cli-mirage/test-support';
 
@@ -34,5 +34,25 @@ module('Acceptance | Songs', function(hooks) {
     assert.dom('[data-test-rr="song-list-item"]:first-child').hasText('Spinning in Daffodils');
     assert.dom('[data-test-rr="song-list-item"]:last-child').hasText('Mind Eraser, No Chaser');
     assert.ok(currentURL().includes('s=-rating'));
+  });
+
+  test('Search songs', async function(assert) {
+    let band = this.server.create('band', { name: 'Them Crooked Vultures' });
+    this.server.create('song', { title: 'Mind Eraser, No Chaser', rating: 2, band});
+    this.server.create('song', { title: 'Elephants', rating: 4, band});
+    this.server.create('song', { title: 'Spinning in Daffodils', rating: 5, band});
+    this.server.create('song', { title: 'New Fang', rating: 3, band});
+    this.server.create('song', { title: 'No One Loves Me & Neither Do I', rating: 4, band});
+
+    await visit('/');
+    await click('[data-test-rr="band-link"]');
+    await fillIn('[data-test-rr="search-box"]', 'no');
+
+    assert.dom('[data-test-rr="song-list-item"]').exists({ count: 2 });
+
+    await click('[data-test-rr="sort-by-title-desc"]');
+
+    assert.dom('[data-test-rr="song-list-item"]:first-child').hasText('No One Loves Me & Neither Do I');
+    assert.dom('[data-test-rr="song-list-item"]:last-child').hasText('Mind Eraser, No Chaser');
   });
 });
