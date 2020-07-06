@@ -20,8 +20,20 @@ module('Acceptance | Songs', function(hooks) {
     assert.dom('[data-test-rr="song-list-item"]:first-child').hasText('Elephants');
     assert.dom('[data-test-rr="song-list-item"]:last-child').hasText('Spinning in Daffodils');
 
+    await click('[data-test-rr="sort-by-title-asc"]');
+    assert.dom('[data-test-rr="song-list-item"]:first-child').hasText('Elephants');
+    assert.dom('[data-test-rr="song-list-item"]:last-child').hasText('Spinning in Daffodils');
+
     await click('[data-test-rr="sort-by-title-desc"]');
     assert.dom('[data-test-rr="song-list-item"]:first-child').hasText('Spinning in Daffodils');
     assert.dom('[data-test-rr="song-list-item"]:last-child').hasText('Elephants');
+
+    await click('[data-test-rr="sort-by-rating-asc"]');
+    assert.dom('[data-test-rr="song-list-item"]:first-child').hasText('Mind Eraser, No Chaser');
+    assert.dom('[data-test-rr="song-list-item"]:last-child').hasText('Spinning in Daffodils');
+
+    await click('[data-test-rr="sort-by-rating-desc"]');
+    assert.dom('[data-test-rr="song-list-item"]:first-child').hasText('Spinning in Daffodils');
+    assert.dom('[data-test-rr="song-list-item"]:last-child').hasText('Mind Eraser, No Chaser');
   });
 });
