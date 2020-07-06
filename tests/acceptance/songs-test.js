@@ -1,5 +1,5 @@
 import { module, test } from 'qunit';
-import { visit, currentURL, click, pauseTest } from '@ember/test-helpers';
+import { visit, currentURL, click } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
 import { setupMirage } from 'ember-cli-mirage/test-support';
 
@@ -19,5 +19,9 @@ module('Acceptance | Songs', function(hooks) {
 
     assert.dom('[data-test-rr="song-list-item"]:first-child').hasText('Elephants');
     assert.dom('[data-test-rr="song-list-item"]:last-child').hasText('Spinning in Daffodils');
+
+    await click('[data-test-rr="sort-by-title-desc"]');
+    assert.dom('[data-test-rr="song-list-item"]:first-child').hasText('Spinning in Daffodils');
+    assert.dom('[data-test-rr="song-list-item"]:last-child').hasText('Elephants');
   });
 });
